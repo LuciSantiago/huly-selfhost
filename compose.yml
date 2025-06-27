@@ -60,7 +60,7 @@ services:
       - STORAGE_CONFIG=minio|minio?accessKey=minioadmin&secretKey=minioadmin
 
       - FRONT_URL=http://front:8080
-      - ACCOUNTS_URL=http://account:3000
+      - ACCOUNTS_URL=http://account:3004
       - FULLTEXT_URL=http://fulltext:4700
       - STATS_URL=http://stats:4900
       - LAST_NAME_FIRST=${LAST_NAME_FIRST:-true}
@@ -71,7 +71,7 @@ services:
     environment:
       - COLLABORATOR_PORT=3078
       - SECRET=${SECRET}
-      - ACCOUNTS_URL=http://account:3000
+      - ACCOUNTS_URL=http://account:3004
       - DB_URL=mongodb://mongodb:27017
       - STATS_URL=http://stats:4900
       - STORAGE_CONFIG=minio|minio?accessKey=minioadmin&secretKey=minioadmin
@@ -84,14 +84,14 @@ services:
       - SERVER_SECRET=${SECRET}
       - DB_URL=mongodb://mongodb:27017
       - MONGO_URL=mongodb://mongodb:27017
-      - TRANSACTOR_URL=ws://transactor:3331;wss://ws-project.lucianosantiago.dev
+      - TRANSACTOR_URL=wss://transactor:3331;wss://ws-project.lucianosantiago.dev
       - STORAGE_CONFIG=minio|minio?accessKey=minioadmin&secretKey=minioadmin
       - FRONT_URL=http://front:8080
       - STATS_URL=http://stats:4900
       - MODEL_ENABLED=*
 
-      - ACCOUNTS_URL=http://account:3000
-      - ACCOUNT_PORT=3000
+      - ACCOUNTS_URL=http://account:3004
+      - ACCOUNT_PORT=3004
     restart: unless-stopped
 
   workspace:
@@ -100,10 +100,10 @@ services:
       - SERVER_SECRET=${SECRET}
       - DB_URL=mongodb://mongodb:27017
       - MONGO_URL=mongodb://mongodb:27017
-      - TRANSACTOR_URL=ws://transactor:3331;wss://ws-project.lucianosantiago.dev
+      - TRANSACTOR_URL=wss://transactor:3331;wss://ws-project.lucianosantiago.dev
       - STORAGE_CONFIG=minio|minio?accessKey=minioadmin&secretKey=minioadmin
       - MODEL_ENABLED=*
-      - ACCOUNTS_URL=http://account:3000
+      - ACCOUNTS_URL=http://account:3004
       - STATS_URL=http://stats:4900
     restart: unless-stopped
 
@@ -114,7 +114,7 @@ services:
       - SERVER_SECRET=${SECRET}
       - LOVE_ENDPOINT=http${SECURE:+s}://${HOST_ADDRESS}/_love
       - ACCOUNTS_URL=http${SECURE:+s}://${HOST_ADDRESS}/_accounts
-      - TRANSACTOR_URL=ws://transactor:3331;wss://ws-project.lucianosantiago.dev
+      - TRANSACTOR_URL=wss://transactor:3331;wss://ws-project.lucianosantiago.dev
       - REKONI_URL=http${SECURE:+s}://${HOST_ADDRESS}/_rekoni
       - CALENDAR_URL=http${SECURE:+s}://${HOST_ADDRESS}/_calendar
       - GMAIL_URL=http${SECURE:+s}://${HOST_ADDRESS}/_gmail
@@ -141,7 +141,7 @@ services:
       - ELASTIC_INDEX_NAME=huly_storage_index
       - STORAGE_CONFIG=minio|minio?accessKey=minioadmin&secretKey=minioadmin
       - REKONI_URL=http://rekoni:4004
-      - ACCOUNTS_URL=http://account:3000
+      - ACCOUNTS_URL=http://account:3004
       - STATS_URL=http://stats:4900
     restart: unless-stopped
 
