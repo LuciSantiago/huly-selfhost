@@ -84,7 +84,7 @@ services:
       - SERVER_SECRET=${SECRET}
       - DB_URL=mongodb://mongodb:27017
       - MONGO_URL=mongodb://mongodb:27017
-      - TRANSACTOR_URL=wss://transactor:3331;wss://${HOST_ADDRESS}/_transactor;ws://transactor:3331
+      - TRANSACTOR_URL=wss://transactor:3331;wss://${HOST_ADDRESS}/_transactor
       - STORAGE_CONFIG=minio|minio?accessKey=minioadmin&secretKey=minioadmin
       - FRONT_URL=http://front:8080
       - STATS_URL=http://stats:4900
@@ -100,7 +100,7 @@ services:
       - SERVER_SECRET=${SECRET}
       - DB_URL=mongodb://mongodb:27017
       - MONGO_URL=mongodb://mongodb:27017
-      - TRANSACTOR_URL=wss://transactor:3331;wss://${HOST_ADDRESS}/_transactor;ws://transactor:3331
+      - TRANSACTOR_URL=wss://transactor:3331;wss://${HOST_ADDRESS}/_transactor
       - STORAGE_CONFIG=minio|minio?accessKey=minioadmin&secretKey=minioadmin
       - MODEL_ENABLED=*
       - ACCOUNTS_URL=http://account:3000
@@ -114,7 +114,7 @@ services:
       - SERVER_SECRET=${SECRET}
       - LOVE_ENDPOINT=http${SECURE:+s}://${HOST_ADDRESS}/_love
       - ACCOUNTS_URL=http${SECURE:+s}://${HOST_ADDRESS}/_accounts
-      - TRANSACTOR_URL=wss://transactor:3331;wss://${HOST_ADDRESS}/_transactor;ws://transactor:3331
+      - TRANSACTOR_URL=wss://transactor:3331;wss://${HOST_ADDRESS}/_transactor
       - REKONI_URL=http${SECURE:+s}://${HOST_ADDRESS}/_rekoni
       - CALENDAR_URL=http${SECURE:+s}://${HOST_ADDRESS}/_calendar
       - GMAIL_URL=http${SECURE:+s}://${HOST_ADDRESS}/_gmail
