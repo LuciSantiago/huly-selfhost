@@ -117,7 +117,7 @@ services:
       - LOVE_ENDPOINT=http${SECURE:+s}://${HOST_ADDRESS}/_love
       - ACCOUNTS_URL=http${SECURE:+s}://${HOST_ADDRESS}/_accounts
 
-      - TRANSACTOR_URL=ws${SECURE:+s}://${HOST_ADDRESS}/_transactor
+      - TRANSACTOR_URL=wss://${HOST_ADDRESS}/_transactor
       - REKONI_URL=http${SECURE:+s}://${HOST_ADDRESS}/_rekoni
       - CALENDAR_URL=http${SECURE:+s}://${HOST_ADDRESS}/_calendar
       - GMAIL_URL=http${SECURE:+s}://${HOST_ADDRESS}/_gmail
