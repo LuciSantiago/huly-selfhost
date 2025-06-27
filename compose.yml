@@ -60,7 +60,7 @@ services:
       - STORAGE_CONFIG=minio|minio?accessKey=minioadmin&secretKey=minioadmin
 
       - FRONT_URL=http://front:8080
-      - ACCOUNTS_URL=http://account:3004
+      - ACCOUNTS_URL=http://account:3000
       - FULLTEXT_URL=http://fulltext:4700
       - STATS_URL=http://stats:4900
       - LAST_NAME_FIRST=${LAST_NAME_FIRST:-true}
@@ -71,7 +71,7 @@ services:
     environment:
       - COLLABORATOR_PORT=3078
       - SECRET=${SECRET}
-      - ACCOUNTS_URL=http://account:3004
+      - ACCOUNTS_URL=http://account:3000
       - DB_URL=mongodb://mongodb:27017
       - STATS_URL=http://stats:4900
       - STORAGE_CONFIG=minio|minio?accessKey=minioadmin&secretKey=minioadmin
@@ -80,7 +80,7 @@ services:
   account:
     image: hardcoreeng/account:${HULY_VERSION}
     environment:
-      - SERVER_PORT=3004
+      - SERVER_PORT=3000
       - SERVER_SECRET=${SECRET}
       - DB_URL=mongodb://mongodb:27017
       - MONGO_URL=mongodb://mongodb:27017
@@ -90,8 +90,8 @@ services:
       - STATS_URL=http://stats:4900
       - MODEL_ENABLED=*
 
-      - ACCOUNTS_URL=http://account:3004
-      - ACCOUNT_PORT=3004
+      - ACCOUNTS_URL=http://account:3000
+      - ACCOUNT_PORT=3000
     restart: unless-stopped
 
   workspace:
@@ -103,7 +103,7 @@ services:
       - TRANSACTOR_URL=wss://transactor:3331;wss://ws-project.lucianosantiago.dev
       - STORAGE_CONFIG=minio|minio?accessKey=minioadmin&secretKey=minioadmin
       - MODEL_ENABLED=*
-      - ACCOUNTS_URL=http://account:3004
+      - ACCOUNTS_URL=http://account:3000
       - STATS_URL=http://stats:4900
     restart: unless-stopped
 
