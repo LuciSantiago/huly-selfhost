@@ -1,4 +1,4 @@
-# REMOVIDO: As linhas "name" e "version" foram removidas para garantir a compatibilidade.
+# As linhas "name" e "version" foram removidas para corrigir o erro "no service selected".
 services:
   mongodb:
     image: "mongo:7-jammy"
