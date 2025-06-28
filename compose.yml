@@ -1,3 +1,4 @@
+# REMOVIDO: As linhas "name" e "version" foram removidas para garantir a compatibilidade.
 services:
   mongodb:
     image: "mongo:7-jammy"
@@ -107,19 +108,17 @@ services:
     environment:
       - SERVER_PORT=8080
       - SERVER_SECRET=${SECRET}
-      # CORREÇÃO FINAL: As URLs públicas devem ser construídas dinamicamente pelo frontend
-      # usando o HOST_ADDRESS e o protocolo SECURE. Os caminhos /_accounts, /_transactor são adicionados pelo código do frontend.
-      - LOVE_ENDPOINT=https${SECURE:+s}://${HOST_ADDRESS}/_love
-      - ACCOUNTS_URL=https://${HOST_ADDRESS}
-      - TRANSACTOR_URL=wss://${HOST_ADDRESS}
-      - REKONI_URL=https://${HOST_ADDRESS}/_rekoni
-      - CALENDAR_URL=https://${HOST_ADDRESS}/_calendar
-      - GMAIL_URL=https://${HOST_ADDRESS}/_gmail
-      - TELEGRAM_URL=https://${HOST_ADDRESS}/_telegram
-      - STATS_URL=https://${HOST_ADDRESS}/_stats
+      - LOVE_ENDPOINT=http${SECURE:+s}://${HOST_ADDRESS}/_love
+      - ACCOUNTS_URL=http${SECURE:+s}://${HOST_ADDRESS}/_accounts
+      - TRANSACTOR_URL=ws${SECURE:+s}://${HOST_ADDRESS}/_transactor
+      - REKONI_URL=http${SECURE:+s}://${HOST_ADDRESS}/_rekoni
+      - CALENDAR_URL=http${SECURE:+s}://${HOST_ADDRESS}/_calendar
+      - GMAIL_URL=http${SECURE:+s}://${HOST_ADDRESS}/_gmail
+      - TELEGRAM_URL=http${SECURE:+s}://${HOST_ADDRESS}/_telegram
+      - STATS_URL=http${SECURE:+s}://${HOST_ADDRESS}/_stats
       - UPLOAD_URL=/files
       - ELASTIC_URL=http://elastic:9200
-      - COLLABORATOR_URL=wss://${HOST_ADDRESS}/_collaborator
+      - COLLABORATOR_URL=ws${SECURE:+s}://${HOST_ADDRESS}/_collaborator
       - STORAGE_CONFIG=minio|minio?accessKey=minioadmin&secretKey=minioadmin
       - DB_URL=mongodb://mongodb:27017
       - MONGO_URL=mongodb://mongodb:27017
