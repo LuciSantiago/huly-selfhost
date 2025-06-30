@@ -20,8 +20,7 @@ services:
     command: |
       /bin/sh -c "./bin/elasticsearch-plugin list | grep -q ingest-attachment |
 
-| yes |./bin/elasticsearch-plugin install --silent ingest-attachment;
-      /usr/local/bin/docker-entrypoint.sh eswrapper"
+| yes |./bin/elasticsearch-plugin install --silent ingest-attachment; /usr/local/bin/docker-entrypoint.sh eswrapper"
     volumes:
       - elastic:/usr/share/elasticsearch/data
     environment:
