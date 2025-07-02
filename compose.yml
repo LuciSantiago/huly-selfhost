@@ -1,3 +1,5 @@
+name: ${DOCKER_NAME}
+version: "3"
 services:
   mongodb:
     image: "mongo:7-jammy"
@@ -19,8 +21,8 @@ services:
     image: "elasticsearch:7.14.2"
     command: |
       /bin/sh -c "./bin/elasticsearch-plugin list | grep -q ingest-attachment |
-
-| yes |./bin/elasticsearch-plugin install --silent ingest-attachment; /usr/local/bin/docker-entrypoint.sh eswrapper"
+| yes |./bin/elasticsearch-plugin install --silent ingest-attachment;
+      /usr/local/bin/docker-entrypoint.sh eswrapper"
     volumes:
       - elastic:/usr/share/elasticsearch/data
     environment:
@@ -49,12 +51,14 @@ services:
   transactor:
     image: hardcoreeng/transactor:${HULY_VERSION}
     environment:
+      # CORREÇÃO: A porta interna deve ser 3333 para corresponder ao que os outros serviços esperam.
       - SERVER_PORT=3333
       - SERVER_SECRET=${SECRET}
       - SERVER_CURSOR_MAXTIMEMS=30000
       - DB_URL=mongodb://mongodb:27017
       - MONGO_URL=mongodb://mongodb:27017
       - STORAGE_CONFIG=minio|minio?accessKey=minioadmin&secretKey=minioadmin
+      # CORREÇÃO: A comunicação interna deve usar nomes de serviço, não localhost.
       - FRONT_URL=http://front:8080
       - ACCOUNTS_URL=http://account:3000
       - FULLTEXT_URL=http://fulltext:4700
@@ -80,12 +84,13 @@ services:
       - SERVER_SECRET=${SECRET}
       - DB_URL=mongodb://mongodb:27017
       - MONGO_URL=mongodb://mongodb:27017
-      # CORREÇÃO FINAL: Restaurada a URL composta, com a parte interna e pública.
-      - TRANSACTOR_URL=ws://transactor:3333;ws${SECURE:+s}://${HOST_ADDRESS}/_transactor
+      # CORREÇÃO: A porta interna do transactor é 3333.
+      - TRANSACTOR_URL=ws://transactor:3333
       - STORAGE_CONFIG=minio|minio?accessKey=minioadmin&secretKey=minioadmin
       - FRONT_URL=http://front:8080
       - STATS_URL=http://stats:4900
       - MODEL_ENABLED=*
+      # CORREÇÃO: A comunicação interna deve usar nomes de serviço.
       - ACCOUNTS_URL=http://account:3000
       - ACCOUNT_PORT=3000
     restart: unless-stopped
@@ -96,8 +101,8 @@ services:
       - SERVER_SECRET=${SECRET}
       - DB_URL=mongodb://mongodb:27017
       - MONGO_URL=mongodb://mongodb:27017
-      # CORREÇÃO FINAL: Restaurada a URL composta, com a parte interna e pública.
-      - TRANSACTOR_URL=ws://transactor:3333;ws${SECURE:+s}://${HOST_ADDRESS}/_transactor
+      # CORREÇÃO: A porta interna do transactor é 3333.
+      - TRANSACTOR_URL=ws://transactor:3333
       - STORAGE_CONFIG=minio|minio?accessKey=minioadmin&secretKey=minioadmin
       - MODEL_ENABLED=*
       - ACCOUNTS_URL=http://account:3000
@@ -109,9 +114,9 @@ services:
     environment:
       - SERVER_PORT=8080
       - SERVER_SECRET=${SECRET}
-      # CORREÇÃO FINAL: As URLs públicas devem apontar para os caminhos corretos que o proxy irá rotear.
       - LOVE_ENDPOINT=http${SECURE:+s}://${HOST_ADDRESS}/_love
       - ACCOUNTS_URL=http${SECURE:+s}://${HOST_ADDRESS}/_accounts
+      # ADIÇÃO: URL pública explícita para o transactor, que o frontend usará.
       - TRANSACTOR_URL=ws${SECURE:+s}://${HOST_ADDRESS}/_transactor
       - REKONI_URL=http${SECURE:+s}://${HOST_ADDRESS}/_rekoni
       - CALENDAR_URL=http${SECURE:+s}://${HOST_ADDRESS}/_calendar
